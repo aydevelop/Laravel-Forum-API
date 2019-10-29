@@ -16,9 +16,11 @@ class QuestionResource extends JsonResource
     {
         return [
             'title' => $this->title,
+            'slug' => $this->slug,
             'path' => $this->path,
             'body' => $this->body,
             'created_at' => $this->created_at->diffForHumans(),
+            'user_id' => $this->user_id,
             'user' => $this->user->name
         ];
     }
