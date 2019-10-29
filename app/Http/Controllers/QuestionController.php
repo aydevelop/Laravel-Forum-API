@@ -76,6 +76,11 @@ class QuestionController extends Controller
      */
     public function update(Request $request, Question $question)
     {
+        if(auth()->user()->id != $question->user_id)
+        {
+            return response('No Update', Response::HTTP_ACCEPTED);
+        }
+
         $question->update($request->all());
         return response('Update', Response::HTTP_ACCEPTED);
     }
@@ -88,7 +93,12 @@ class QuestionController extends Controller
      */
     public function destroy(Question $question)
     {
+        if(auth()->user()->id != $question->user_id)
+        {
+            return response('No deleted', Response::HTTP_NO_CONTENT);
+        }
+
         $question->delete();
-        return response("question is deleted", Response::HTTP_NO_CONTENT);
+        return response("Question is deleted", Response::HTTP_NO_CONTENT);
     }
 }
