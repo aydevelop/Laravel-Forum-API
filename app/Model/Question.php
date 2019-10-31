@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Question extends Model
 {
+    protected $fillable = ['title','slug','body','category_id','user_id'];
+    //protected $guarded = [];
+    protected $with = ['replies'];
+
     protected static function boot()
     {
         parent::boot();
@@ -28,7 +32,7 @@ class Question extends Model
 
     public function replies()
     {
-        return $this->hasMany(Reply::class);
+        return $this->hasMany(Reply::class)->oldest();
     }
 
     public function category()
@@ -36,8 +40,6 @@ class Question extends Model
         return $this->belongsTo(Category::class);
     }
 
-    protected $fillable = ['title','slug','body','category_id','user_id'];
-    //protected $guarded = [];
 
     public function getPathAttribute()
     {

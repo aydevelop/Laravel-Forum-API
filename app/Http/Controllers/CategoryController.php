@@ -42,7 +42,7 @@ class CategoryController extends Controller
         $category->slug = str_slug($request->name);
         $category->save();
         
-        return response('Created', Response::HTTP_CREATED);
+        return response($category, Response::HTTP_CREATED);
     }
 
     /**
@@ -76,15 +76,22 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        $input = $request->all();
+        // $input = $request->all();
 
-        if($request->name)
-        {
-            $input['slug'] = str_slug($request->name); 
-        }  
+        // if($request->name)
+        // {
+        //     $input['slug'] = str_slug($request->name); 
+        // }  
 
-        $category->update($input);
-        return response('Updated', Response::HTTP_ACCEPTED);
+        // $category->update($input);
+        // return response('Updated', Response::HTTP_ACCEPTED);
+    
+        $category->update([
+            'name'=>$request->name,
+            'slug'=>str_slug($request->name)
+        ]);
+
+        return response(new CategoryResource($category), Response::HTTP_ACCEPTED);
     }
 
     /**
@@ -96,6 +103,6 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         $category->delete();
-        return response(null, Response::HTTP_NO_CONTENT);
+        return response("deleted", Response::HTTP_ACCEPTED);
     }
 }
