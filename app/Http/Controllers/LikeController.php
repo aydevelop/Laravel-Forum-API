@@ -12,7 +12,7 @@ class LikeController extends Controller
     public function __construct()
     {
         $this->middleware('jwt');
-    }
+    }    
 
     public function likeIt(Reply $reply)
     {
@@ -20,7 +20,8 @@ class LikeController extends Controller
             'user_id' => auth()->id()
         ]);
 
-        broadcast(new LikeEvent($reply->id, 1))->toOthers();
+        //broadcast(new LikeEvent($reply->id, 1))->toOthers();
+        event(new LikeEvent($reply->id, 1));
         return response("like",200);
     }
 

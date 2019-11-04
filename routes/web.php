@@ -1,5 +1,7 @@
 <?php
 
+use App\Jobs\SendReminderEmail;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,5 +14,6 @@
 */
 
 Route::get('/', function () {
-    return view('home');
+    //SendReminderEmail::dispatch();
+    return ('home');
 });
