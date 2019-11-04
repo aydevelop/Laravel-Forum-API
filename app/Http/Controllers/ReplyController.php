@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Model\Reply;
+use App\Events\QEvent;
 use App\Model\Question;
+use App\Events\PrivateEvent;
 use Illuminate\Http\Request;
 use App\Http\Resources\ReplyResource;
 use App\Notifications\NewReplyNotification;
@@ -39,6 +41,10 @@ class ReplyController extends Controller
         
         //if($reply->user_id !== $question->user_id){
             $user = $question->user;
+            //event(new QEvent());
+
+            //broadcast(new PrivateEvent(auth()->user()));
+
             $user->notify(new NewReplyNotification($reply));
         //}
         

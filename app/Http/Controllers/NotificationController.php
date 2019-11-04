@@ -25,6 +25,6 @@ class NotificationController extends Controller
         $item = auth()->user()->notifications
         ->where('id', $request->id)->markAsRead();
 
-        return $request->id;
+        return "markAsRead";
     }
 }
