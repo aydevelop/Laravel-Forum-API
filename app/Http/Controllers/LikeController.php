@@ -21,6 +21,7 @@ class LikeController extends Controller
         ]);
 
         broadcast(new LikeEvent($reply->id, 1))->toOthers();
+        return response("like",200);
     }
 
     public function unLikeIt(Reply $reply)
@@ -31,5 +32,7 @@ class LikeController extends Controller
         ->first()->delete();
 
         broadcast(new LikeEvent($reply->id, 0))->toOthers();
+    
+        return response("un_like",200);
     }
 }
