@@ -3,6 +3,7 @@
 namespace App\Events;
 
 use Illuminate\Broadcasting\Channel;
+use App\Http\Resources\ReplyResource;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -19,9 +20,12 @@ class QEvent implements ShouldBroadcast
      *
      * @return void
      */
-    public function __construct()
+
+    public $data;
+
+    public function __construct($data)
     {
-        //
+        $this->data = ($data);
     }
 
     /**
@@ -31,6 +35,6 @@ class QEvent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('orders');
+        return new Channel('qChannel');
     }
 }

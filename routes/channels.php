@@ -16,18 +16,18 @@
 //     return true;
 // });
 
-Broadcast::channel('qMsg', function ($user) {
-    //return (int) $user->id === (int) $id;
-    return true;
-});
+// Broadcast::channel('qMsg', function ($user) {
+//     //return (int) $user->id === (int) $id;
+//     return true;
+// });
 
-Broadcast::channel('orders', function ($user) {
-    return true;
-});
+// Broadcast::channel('orders', function ($user) {
+//     return true;
+// });
 
-Broadcast::channel('user.{id}', function ($user, $id) {
-    return (int) $user->id === (int) $id;
-});
+// Broadcast::channel('user.{id}', function ($user, $id) {
+//     return (int) $user->id === (int) $id;
+// });
 
 // Broadcast::channel('likeChannel2', function () {
 //     return true;

@@ -41,11 +41,10 @@ class ReplyController extends Controller
         
         //if($reply->user_id !== $question->user_id){
             $user = $question->user;
-            //event(new QEvent());
-
             //broadcast(new PrivateEvent(auth()->user()));
 
-            $user->notify(new NewReplyNotification($reply));
+            $user->notify(new NewReplyNotification($reply));            
+            event(new QEvent($reply));
         //}
         
         return response(['reply' => new ReplyResource($reply)], Response::HTTP_CREATED);
